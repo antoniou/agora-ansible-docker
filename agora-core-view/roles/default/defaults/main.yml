@@ -1,0 +1,6 @@
+---
+agora_core_packages:
+  - wget
+  - gcc
+  - g++
+  - binutils
