@@ -16,6 +16,7 @@ RUN npm install && bower install --allow-root && grunt build
 
 # Nginx Configuration
 ADD nginx.conf /etc/nginx/conf.d/agoracore.conf
+ADD root_fs /
 
 EXPOSE 80 443
 
