@@ -5,6 +5,7 @@ agora_core_packages:
   - gcc
   - g++
   - binutils
+  - nginx
 core_packages:
 npm_packages:
   - grunt-cli
