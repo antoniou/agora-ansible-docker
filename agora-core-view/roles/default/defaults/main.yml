@@ -1,6 +1,22 @@
 ---
+base_image: node:0.10.31
 agora_core_packages:
   - wget
   - gcc
   - g++
   - binutils
+core_packages:
+npm_packages:
+  - grunt-cli
+  - grunt
+  - bower
+
+repos:
+  agoracore:
+    repo: https://github.com/agoravoting/agora-core-view.git
+    branch: master
+    dest: /agora-core-view
+
+agora_elections_domain: agora.dev
+agora_core_view_port: 14444
+agora_core_view_domain: agora.dev
