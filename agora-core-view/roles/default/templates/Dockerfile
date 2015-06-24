@@ -20,4 +20,6 @@ ADD root_fs /
 
 EXPOSE 80 443
 
-CMD ["nginx", "-g", "daemon off;"]
+RUN chmod +x /usr/local/bin/run.sh
+RUN chmod +x /usr/local/bin/render_templates
+CMD "run.sh"

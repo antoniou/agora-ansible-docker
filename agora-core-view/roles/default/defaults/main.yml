@@ -1,4 +1,5 @@
 ---
+docker_tag: agora-core-view
 base_image: node:0.10.31
 agora_core_packages:
   - wget

@@ -8,12 +8,12 @@ var avConfigData = {
   // getting info about an election. This url is usually in the form of
   // 'https://foo/api/v3/' and always ends in '/'.
   theme: "default",
-  baseUrl: "http://{{ agora_elections_domain }}/elections/api/",
+  baseUrl: "http://AGORAENV_baseUrl/elections/api/",
   freeAuthId: 1,
 
   // AuthApi base url
-  authAPI: "http://{{ agora_elections_domain }}/authapi/api/",
-  dnieUrl: "https://{{ agora_elections_domain }}/authapi/api/authmethod/dnie/auth/",
+  authAPI: "http://AGORAENV_authAPI/authapi/api/",
+  dnieUrl: "https://AGORAENV_dnieUrl/authapi/api/authmethod/dnie/auth/",
   // Agora Elections base url
   electionsAPI: "http://{{ agora_elections_domain }}/elections/api/",
 
@@ -25,7 +25,7 @@ var avConfigData = {
 
   timeoutSeconds: 3600,
 
-  publicURL: "http://{{ agora_elections_domain }}/elections/public/",
+  publicURL: "http://AGORAENV_publicURL/elections/public/",
 
   // if we are in debug mode or not
   debug: true,
