@@ -11,7 +11,8 @@ RUN git clone {{ repos.agoracore.repo }} --branch {{ repos.agoracore.branch }} \
  		--single-branch {{ repos.agoracore.dest }}
 ADD avConfig.js {{ repos.agoracore.dest }}/avConfig.js
 WORKDIR {{ repos.agoracore.dest }}
-RUN npm install & bower install && grunt build
+
+RUN npm install && bower install --allow-root && grunt build
 
 # Nginx Configuration
 ADD nginx.conf /etc/nginx/conf.d/agoracore.conf
