@@ -2,6 +2,6 @@
 # - include_vars: ../config.yml
 
 - name: This playbook builds and uploads an agora-core-view docker image
-  hosts: agora-core-view
+  hosts: all
   roles:
   - role: default
