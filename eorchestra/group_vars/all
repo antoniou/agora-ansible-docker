@@ -1,0 +1,2 @@
+docker_build_dir: "{{ ansible_env.PWD }}/../build"
+base_image: ubuntu:14.04

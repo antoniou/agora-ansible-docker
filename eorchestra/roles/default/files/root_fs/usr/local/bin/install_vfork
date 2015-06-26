@@ -1,0 +1,17 @@
+#!/bin/bash
+
+export JAVA_TOOL_OPTIONS=Dfile.encoding=UTF8
+USAGE="Usage: $0 vfork_source vfork_destination"
+
+if [ "$#" -lt 2 ]; then
+  echo $USAGE
+fi
+
+source=$1
+dest=$2
+
+cd $source
+./configure --enable-jgmpmee --enable-jecn && \
+ make && make install && \
+ cp .vfork_env $dest && \
+ bash -l -c "source $dest/.vfork_env && vog -rndinit RandomDevice /dev/urandom"

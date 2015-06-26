@@ -1,0 +1,7 @@
+---
+# - include_vars: ../config.yml
+
+- name: This playbook builds an Authority server docker image
+  hosts: all
+  roles:
+  - role: default

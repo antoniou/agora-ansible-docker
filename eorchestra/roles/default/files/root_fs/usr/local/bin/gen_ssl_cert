@@ -1,0 +1,18 @@
+#!/bin/bash
+
+cd $CERTS_DIR
+CERT_PATH=$CERTS_DIR/cert.pem
+
+if [ ! -f $CERT_PATH ] || [ $(md5sum $CERT_PATH | grep 72a8ee2b40e77cd6e77e1db9285c7e19 | wc -l) == "1" ]
+then
+  openssl req -nodes -x509 -newkey rsa:4096 -keyout key-nopass.pem -out cert.pem -days 365 <<EOF
+$CERT_COUNTRY
+$CERT_STATE
+$CERT_LOC
+$CERT_ORG
+$CERT_ORG_UNIT
+$CERT_NAME
+$CERT_EMAIL
+EOF
+  cp cert.pem calist
+fi

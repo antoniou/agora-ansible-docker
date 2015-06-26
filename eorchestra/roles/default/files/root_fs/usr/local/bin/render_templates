@@ -1,0 +1,64 @@
+#!/bin/bash
+
+DEFAULT_RENDER_DIR=/etc/render.d
+_V=0
+
+usage() {
+  cat <<EOF
+    Usage: $0 [options] [template.d directory]
+    -h    Display help message
+    -v    Verbose mode
+EOF
+exit 1;
+}
+
+log () {
+  if [[ $_V -eq 1 ]]; then
+      echo "$@"
+      echo ""
+  fi
+}
+
+render() {
+  # Here we grep all env vars from the file given as argument
+  # for each the next block gets called with the env var as 'var'
+  grep "AGORAENV_[A-Za-z0-9\_]*" $1 -o | while read var
+  do
+    envvar=${var#AGORAENV_}
+    # Via double substitution the contents of the env var is stored as value
+    eval "value=\${$envvar}" &&
+    # finally the correct value gets inserted
+    sed -i -e "s/$var/$value/" $1
+  done
+
+}
+
+while getopts "hv" opt; do
+  case $opt in
+    h)
+      usage
+      exit 0
+      ;;
+    v)
+      _V=1
+      ;;
+  esac
+done
+
+[ -d "${@: -1}" ] && render_dir=${@: -1} || render_dir=$DEFAULT_RENDER_DIR
+
+log "Render directory is set to $render_dir"
+
+for file in $render_dir/*
+do
+  while read line
+  do
+      if [ -f $line ];
+      then
+        log "Rendering file $line in place"
+        render $line
+      else
+        echo "File $line does not exist, skipping..."
+      fi
+  done < $file
+done

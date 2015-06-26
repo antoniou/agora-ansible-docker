@@ -1,0 +1,18 @@
+---
+- name: Create output directory
+  file: path={{ docker_build_dir }} state=directory mode=0755
+
+- name: Create output dir where the config will be uploaded from
+  file: path={{ docker_build_dir }}/root_fs/ state=directory
+
+- name: Copy root filesystem files
+  copy: src=root_fs/ dest=/{{ docker_build_dir }}/root_fs
+
+- name: Render files that will be added to image
+  template: src={{ item.f }} dest={{ docker_build_dir }}/root_fs/{{ item.dest }}
+  with_items:
+    - { f: auth.ini, dest: "{{ eorchestra_dest }}/auth.ini" }
+    - { f: launch.sh, dest: "{{ eorchestra_dest }}/launch.sh" }
+
+- name: Render DockerFile for AgoraCoreView
+  template: src=Dockerfile dest={{ docker_build_dir }}/Dockerfile
