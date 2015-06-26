@@ -18,7 +18,7 @@ RUN npm install && bower install --allow-root && grunt build
 ADD nginx.conf /etc/nginx/conf.d/agoracore.conf
 ADD root_fs /
 
-EXPOSE 80 443
+EXPOSE {{ agora_core_view_port }}
 
 RUN chmod +x /usr/local/bin/run.sh
 RUN chmod +x /usr/local/bin/render_templates
