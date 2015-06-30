@@ -1,0 +1,22 @@
+---
+- name: Output directory is role specific
+  set_fact: build_dir="{{ docker_build_dir }}/{{ docker_tag }}"
+  
+- name: Create output directory
+  file: path={{ build_dir }} state=directory mode=0755
+
+- name: Create output dir where the config will be uploaded from
+  file: path={{ build_dir }}/root_fs/ state=directory
+
+- name: Copy root filesystem files
+  copy: src=root_fs/ dest=/{{ build_dir }}/root_fs
+
+- name: Render files that will be added to image
+  template: src={{ item.f }} dest={{ build_dir }}/root_fs/{{ item.dest }}
+  with_items:
+    - { f: auth.ini, dest: "{{ eorchestra_dest }}/auth.ini" }
+    - { f: launch.sh, dest: "{{ eorchestra_dest }}/launch.sh" }
+    - { f: eorchestra-supervisor.conf, dest: "etc/supervisor/conf.d/eorchestra-supervisor.conf" }
+
+- name: Render DockerFile for Election-Orchestra
+  template: src=Dockerfile dest={{ build_dir }}/Dockerfile

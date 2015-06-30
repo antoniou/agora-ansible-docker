@@ -1,7 +1,9 @@
 #!/bin/bash
-render_templates -v /etc/render.d
+ENTRYPOINT_COMMAND_DIR=/etc/entrypoint.d
 
-# Generate ssl certificate
-gen_ssl_cert $@
+for command in `ls $ENTRYPOINT_COMMAND_DIR/*.sh`
+do
+  chmod +x $command && . $command
+done
 
-nginx -g 'daemon off;'
+service supervisor start

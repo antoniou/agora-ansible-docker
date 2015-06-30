@@ -19,11 +19,11 @@ import os
 ROOT_PATH = os.path.split(os.path.abspath(__file__))[0]
 
 # SQLALCHEMY_DATABASE_URI = 'sqlite:///%s/db.sqlite' % ROOT_PATH
-SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2:///eorchestra'
+SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://AGORAENV_DB_USER:AGORAENV_DB_PASSWORD@AGORAENV_DB_HOST/AGORAENV_DB_NAME'
 
 PRIVATE_DATA_PATH = os.path.join(ROOT_PATH, 'datastore/private')
 PUBLIC_DATA_PATH = '/srv/election-orchestra/server1/public'
-PUBLIC_DATA_BASE_URL = 'https://AGORAENV_host:AGORAENV_port/public_data'
+PUBLIC_DATA_BASE_URL = 'https://AGORAENV_HOST/public_data'
 
 # security configuration
 SSL_CERT_PATH = '/srv/certs/selfsigned/cert.pem'

@@ -1,0 +1,15 @@
+CERT_COUNTRY=UK
+CERT_STATE=England
+CERT_LOC=London
+CERT_ORG=ThoughtWorks
+CERT_ORG_UNIT=ThoughtWorks
+CERT_NAME=agora.thoughtworks.com
+CERT_EMAIL=support@thoughtworks.com
+HOST=localhost
+IP_ADDRESS=192.168.59.103
+PORT=8081
+KEYSTORE_PASS=supersecret
+DB_USER=eorchestra
+DB_PASSWORD=eorchestra
+DB_HOST=192.168.50.2
+DB_NAME=eorchestra

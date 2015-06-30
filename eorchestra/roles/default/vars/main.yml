@@ -7,26 +7,27 @@ eorchestra_dest: /election-orchestra
 vfork_dest: /vfork
 certs_dest: /srv/certs/selfsigned
 apt_packages:
+  - build-essential
+  - git
   - libffi-dev
-  - libpq-dev
   - libgmp-dev
   - libjpeg8-dev
-  - git
+  - libpq-dev
+  - m4
+  - make
   - mercurial
   - nginx
-  - supervisor
-  - python-dev
-  - python-pip
-  - build-essential
-  - python-psycopg2
-  - python-software-properties
-  - uwsgi-plugin-python
   - oracle-java8-installer
   - oracle-java8-set-default
-  - make
-  - m4
+  - python-dev
+  - python-pip
+  - python-psycopg2
+  - python-software-properties
+  - supervisor
+  - uwsgi-plugin-python
 pip_packages:
   - pip==1.5.4
+  - pyinotify
   - setuptools
 required_directories:
   - "{{ eorchestra_dest }}"
@@ -35,13 +36,16 @@ required_directories:
   - /frestq
   - /srv/election-orchestra/server1/public/
 git_repositories:
-  - name: https://github.com/agoravoting/frestq.git
+  frestq:
+    name: https://github.com/agoravoting/frestq.git
     branch: master
     dest: /frestq
-  - name: https://github.com/agoravoting/election-orchestra.git
+  election-orchestra:
+    name: https://github.com/agoravoting/election-orchestra.git
     branch: master
     dest: "{{ eorchestra_dest }}"
-  - name: https://github.com/agoravoting/vfork.git
+  vfork:    
+    name: https://github.com/agoravoting/vfork.git
     branch: master
     dest: "{{ vfork_dest }}"
 repos:

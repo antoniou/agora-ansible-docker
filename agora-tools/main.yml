@@ -1,0 +1,13 @@
+---
+- include: repo.yml
+- include: copy.yml
+
+- name: commands
+  sudo: true
+  template: src=agora-tools/templates/{{item.script}} dest={{ item.dest }} owner={{ item.owner }} mode={{ item.mode }}
+  with_items:
+    - { script: eoconf.json, dest: /etc/eoconf.json, owner: "root", mode: "0600" }
+    - { script: eotest, dest: /usr/bin/eotest, owner: "root", mode: "0755" }
+    - { script: eotasks, dest: /usr/bin/eotasks, owner: "root", mode: "0755" }
+    - { script: eopeers, dest: /usr/bin/eopeers, owner: "root", mode: "0755" }
+    - { script: screenrc, dest: /root/.screenrc, owner: "root", mode: "0644" }

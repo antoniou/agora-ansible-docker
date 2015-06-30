@@ -13,10 +13,10 @@ RUN pip install {{ pip_packages|join(' ')}}
 RUN mkdir -p {{ required_directories|join(' ')}}
 
 # Clone git repositories and install pip requirements
-RUN {% for repo in git_repositories %}
+RUN {% for repo in git_repositories.values() %}
 git clone {{ repo.name }} --branch {{ repo.branch }} {{ repo.dest }} && \
 (pip install -r {{ repo.dest }}/requirements.txt || true )
-{%- if repo != git_repositories[-1] %} && \
+{%- if repo != git_repositories.values()[-1] %} && \
 {% endif -%}
 {% endfor %}
 
@@ -42,11 +42,6 @@ WORKDIR {{ eorchestra_dest }}
 {% for key, value in env_vars.iteritems() %}
 ENV {{ key }} {{ value }}
 {% endfor %}
-
-
-# Nginx Configuration
-ADD nginx.conf /etc/nginx/conf.d/agoracore.conf
-
 
 EXPOSE {{ agora_core_view_port }}
 
