@@ -11,5 +11,11 @@
 - name: Copy root filesystem files
   copy: src=root_fs/ dest=/{{ build_dir }}/root_fs
 
+- name: Render files that will be added to image
+  template: src={{ item.f }} dest={{ build_dir }}/root_fs/{{ item.dest }}
+  with_items:
+    - { f: export_key.sh, dest: "/etc/entrypoint.d/06_export_key.sh" }
+    - { f: install_certs, dest: "/usr/local/bin/install_certs" }
+
 - name: Render DockerFile for Agora-Tools
   template: src=Dockerfile dest={{ build_dir }}/Dockerfile
