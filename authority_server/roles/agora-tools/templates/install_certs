@@ -1,0 +1,52 @@
+#!/usr/bin/env python
+import os
+import json
+import pyinotify
+from subprocess import call
+
+class EventHandler(pyinotify.ProcessEvent):
+    package_dir='/etc/eopeers'
+    installer = 'eopeers'
+    my_package_name = '{{ own_key_name }}' 
+
+    def process_IN_CLOSE_WRITE(self, event):
+        if not ( self.is_installed(event.pathname) or self.is_my_package(event.pathname)):
+            self.install(event.pathname)
+
+    def install(self, package_path):
+        self.package_command('install', package_path)
+
+    def is_installed(self, package_name):
+        name = self.installed_package_path(package_name)
+        return os.path.isfile(name)
+
+    def hostname(self, package_path):
+        installed_path = self.installed_package_path(package_path)
+        return self.read_package(installed_path, 'hostname')
+
+    def package_command(self, command, arg):
+        call([self.installer, '--{0}'.format(command), arg])
+
+    def installed_package_path(self, package_name):
+        host = self.read_package(package_name, 'hostname')
+        return os.path.join(self.package_dir, '{0}.package'.format(host))
+
+    def is_my_package(self, pathname):
+        return  os.path.basename(pathname) == self.my_package_name
+        
+    def read_package(self, package_path, field = None):
+        with open(package_path) as data_file:
+                data = json.load(data_file)
+                if field:
+                    return data[field]
+                return data
+
+# Crate handler
+handler = EventHandler()
+wm = pyinotify.WatchManager()
+
+# Add watches
+res = wm.add_watch(['{{ key_mount_path }}'],
+                   pyinotify.ALL_EVENTS, rec=True)
+notifier = pyinotify.Notifier(wm, handler)
+notifier.loop()

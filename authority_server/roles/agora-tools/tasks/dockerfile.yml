@@ -1,0 +1,21 @@
+---
+- name: Output directory is role specific
+  set_fact: build_dir="{{ docker_build_dir }}/{{ name }}"
+
+- name: Create output directory
+  file: path={{ build_dir }} state=directory mode=0755
+
+- name: Create output dir where the config will be uploaded from
+  file: path={{ build_dir }}/root_fs/ state=directory
+
+- name: Copy root filesystem files
+  copy: src=root_fs/ dest=/{{ build_dir }}/root_fs
+
+- name: Render files that will be added to image
+  template: src={{ item.f }} dest={{ build_dir }}/root_fs/{{ item.dest }}
+  with_items:
+    - { f: export_key.sh, dest: "/etc/entrypoint.d/06_export_key.sh" }
+    - { f: install_certs, dest: "/usr/local/bin/install_certs" }
+
+- name: Render DockerFile for Agora-Tools
+  template: src=Dockerfile dest={{ build_dir }}/Dockerfile
