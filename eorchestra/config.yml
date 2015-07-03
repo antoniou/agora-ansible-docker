@@ -1,0 +1,4 @@
+---
+docker_tag:
+    election_orchestra: election-orchestra-base
+    agora_tools: election-orchestra

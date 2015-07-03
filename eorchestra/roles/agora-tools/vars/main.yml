@@ -1,6 +1,6 @@
 ---
-docker_tag: election-orchestra-wtools
-base_image: election-orchestra
+name: agora-tools
+base_image: antoniou/election-orchestra-base
 apt_repositories:
 eorchestra_dest: /election-orchestra
 vfork_dest: /vfork
@@ -15,4 +15,4 @@ git_repositories:
     dest: /agora-tools
 env_vars:
 key_mount_path: /root/keys
-
+own_key_name: my_auth.pkg

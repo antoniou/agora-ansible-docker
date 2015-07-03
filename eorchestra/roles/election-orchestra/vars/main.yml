@@ -1,5 +1,4 @@
 ---
-docker_tag: election-orchestra
 base_image: ubuntu:14.04
 apt_repositories:
   - ppa:webupd8team/java

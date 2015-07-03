@@ -7,22 +7,14 @@ from subprocess import call
 class EventHandler(pyinotify.ProcessEvent):
     package_dir='/etc/eopeers'
     installer = 'eopeers'
-    my_package_name = 'my_auth.pkg'
+    my_package_name = '{{ own_key_name }}' 
 
-    def process_IN_CREATE(self, event):
+    def process_IN_CLOSE_WRITE(self, event):
         if not ( self.is_installed(event.pathname) or self.is_my_package(event.pathname)):
             self.install(event.pathname)
 
-    def process_IN_DELETE(self, event):
-        if self.is_installed(event.pathname) and not self.is_my_package(event.pathname):
-            hostname = self.hostname(event.pathname)
-            self.uninstall(hostname)
-
     def install(self, package_path):
         self.package_command('install', package_path)
-
-    def uninstall(self, hostname):
-        self.package_command('uninstall', hostname)
 
     def is_installed(self, package_name):
         name = self.installed_package_path(package_name)

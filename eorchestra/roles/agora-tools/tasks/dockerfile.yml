@@ -1,6 +1,6 @@
 ---
 - name: Output directory is role specific
-  set_fact: build_dir="{{ docker_build_dir }}/{{ docker_tag }}"
+  set_fact: build_dir="{{ docker_build_dir }}/{{ name }}"
 
 - name: Create output directory
   file: path={{ build_dir }} state=directory mode=0755
