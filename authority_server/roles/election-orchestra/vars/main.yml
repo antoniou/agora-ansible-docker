@@ -1,0 +1,61 @@
+---
+base_image: ubuntu:14.04
+apt_repositories:
+  - ppa:webupd8team/java
+eorchestra_dest: /election-orchestra
+vfork_dest: /vfork
+certs_dest: /srv/certs/selfsigned
+apt_packages:
+  - build-essential
+  - git
+  - libffi-dev
+  - libgmp-dev
+  - libjpeg8-dev
+  - libpq-dev
+  - m4
+  - make
+  - mercurial
+  - nginx
+  - oracle-java8-installer
+  - oracle-java8-set-default
+  - python-dev
+  - python-pip
+  - python-psycopg2
+  - python-software-properties
+  - supervisor
+  - uwsgi-plugin-python
+pip_packages:
+  - pip==1.5.4
+  - pyinotify
+  - setuptools
+required_directories:
+  - "{{ eorchestra_dest }}"
+  - "{{ vfork_dest }}"
+  - "{{ certs_dest }}"
+  - /frestq
+  - /srv/election-orchestra/server1/public/
+git_repositories:
+  frestq:
+    name: https://github.com/agoravoting/frestq.git
+    branch: master
+    dest: /frestq
+  election-orchestra:
+    name: https://github.com/agoravoting/election-orchestra.git
+    branch: master
+    dest: "{{ eorchestra_dest }}"
+  vfork:    
+    name: https://github.com/agoravoting/vfork.git
+    branch: master
+    dest: "{{ vfork_dest }}"
+repos:
+  agoracore:
+    repo: https://github.com/agoravoting/agora-core-view.git
+    branch: master
+    dest: /agora-core-view
+env_vars:
+  FRESTQ_SETTINGS: base_settings.py
+  CERTS_DIR: "{{ certs_dest }}"
+
+agora_elections_domain: agora.dev
+agora_core_view_port: 14444
+agora_core_view_domain: agora.dev

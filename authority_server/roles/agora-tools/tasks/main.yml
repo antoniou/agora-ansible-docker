@@ -1,0 +1,3 @@
+---
+- include: dockerfile.yml
+#- include: copy.yml

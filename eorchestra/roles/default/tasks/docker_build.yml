@@ -1,3 +1,0 @@
----
-  - name: check or build image
-    shell: "docker build -t {{ docker_tag }} {{ docker_build_dir }}"

@@ -1,0 +1,10 @@
+---
+- name: This playbook builds an Authority server docker image
+  hosts: all
+  vars_files:
+    - config.yml
+  roles:
+  - role: election-orchestra
+  - { role: docker-build, tag: "{{ docker_tag.election_orchestra }}" }
+  - role: agora-tools
+  - { role: docker-build, tag: "{{ docker_tag.agora_tools }}" }

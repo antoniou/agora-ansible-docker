@@ -1,0 +1,18 @@
+---
+name: agora-tools
+base_image: antoniou/election-orchestra-base
+apt_repositories:
+eorchestra_dest: /election-orchestra
+vfork_dest: /vfork
+certs_dest: /srv/certs/selfsigned
+apt_packages:
+pip_packages:
+required_directories:
+git_repositories:
+  agora-tools:
+    name: https://github.com/agoravoting/agora-tools.git
+    branch: master
+    dest: /agora-tools
+env_vars:
+key_mount_path: /root/keys
+own_key_name: my_auth.pkg
