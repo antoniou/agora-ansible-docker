@@ -1,0 +1,17 @@
+---
+ PORT: 8071
+ HOST: auth1
+
+ CERT_PATH: certs/
+ CERT:
+   country: UK
+   state: London
+   loc: London
+   org: ThoughtWorks
+   org_unit: ThoughtWorks
+   name: auth1
+   email: test@test.com
+ CERT_NAME: cert.pem
+ CERT_KEY: key-nopass.pem
+ CERT_CA: calist
+ KEYSTORE_PASS: secret
