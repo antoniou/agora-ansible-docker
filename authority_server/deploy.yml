@@ -1,0 +1,8 @@
+---
+- name: This playbook deploys an Authority server
+  hosts: all
+  vars_files:
+    - config.yml
+  roles:
+  - role: deploy
+    sudo: yes
