@@ -1,0 +1,27 @@
+---
+  - name: Application container
+    docker:
+      name: eorchestra
+      image: antoniou/election-orchestra
+      state: reloaded
+      pull: always
+      volumes:
+        - "{{ host.keys_path }}:{{ docker.keys_path}}"
+        - "{{ host.certs_path }}:{{ docker.certs_path}}"
+      ports:
+        - "{{ PORT }}: {{ PORT }}"
+      expose:
+        - "{{ PORT }}"
+      env:
+        PORT: "{{ PORT }}"
+        HOST: "{{ HOST }}"
+        PUBLICIP: "{{ PUBLIC_IP }}"
+        PRIVATEIP: "{{ PUBLIC_IP }}"
+        KEYSTORE_PASS: "{{ KEYSTORE_PASS }}"
+        DB_USER: "{{ db_user }}"
+        DB_NAME: "{{ db_name }}"
+        DB_HOST: "{{ DB_HOST }}"
+        DB_PASSWORD: "{{ DB_PASSWORD }}"
+        CERT_CA: "{{ CERT_CA }}"
+        CERT_NAME: "{{ CERT_NAME }}"
+        CERT_KEY: "{{ CERT_KEY }}"

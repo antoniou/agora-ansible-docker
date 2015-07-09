@@ -7,11 +7,14 @@ from subprocess import call
 class EventHandler(pyinotify.ProcessEvent):
     package_dir='/etc/eopeers'
     installer = 'eopeers'
-    my_package_name = '{{ own_key_name }}' 
+    my_package_name = '{{ own_key_name }}'
 
     def process_IN_CLOSE_WRITE(self, event):
         if not ( self.is_installed(event.pathname) or self.is_my_package(event.pathname)):
             self.install(event.pathname)
+
+    def process_IN_MOVED_TO(self, event):
+            self.process_IN_CLOSE_WRITE(event)
 
     def install(self, package_path):
         self.package_command('install', package_path)
@@ -33,7 +36,7 @@ class EventHandler(pyinotify.ProcessEvent):
 
     def is_my_package(self, pathname):
         return  os.path.basename(pathname) == self.my_package_name
-        
+
     def read_package(self, package_path, field = None):
         with open(package_path) as data_file:
                 data = json.load(data_file)

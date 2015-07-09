@@ -1,0 +1,16 @@
+---
+  db_user: eorchestra
+  db_name: eorchestra
+  db_port: 5432
+  cidr_block: 172.17.0.0/16
+  PUBLIC_IP: '{{ ansible_eth1["ipv4"]["address"] }}'
+  DB_HOST: '{{ PUBLIC_IP }}'
+  postgres:
+    main_conf: /etc/postgresql/9.3/main/postgresql.conf
+    hba_conf: /etc/postgresql/9.3/main/pg_hba.conf
+  host:
+    keys_path: /home/vagrant/keys
+    certs_path: /home/vagrant/certs
+  docker:
+    keys_path: /root/keys
+    certs_path: /srv/certs/selfsigned

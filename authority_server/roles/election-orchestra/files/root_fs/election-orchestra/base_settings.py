@@ -1,7 +1,7 @@
 # debug, set to false on production deployment
 DEBUG = False
 
-ROOT_URL = 'https://AGORAENV_HOST/api/queues'
+ROOT_URL = 'https://AGORAENV_HOST:AGORAENV_PORT/api/queues'
 
 # URL to our HTTP server
 VFORK_SERVER_URL = 'http://AGORAENV_HOST'
@@ -23,7 +23,7 @@ SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://AGORAENV_DB_USER:AGORAENV_DB_PA
 
 PRIVATE_DATA_PATH = os.path.join(ROOT_PATH, 'datastore/private')
 PUBLIC_DATA_PATH = '/srv/election-orchestra/server1/public'
-PUBLIC_DATA_BASE_URL = 'https://AGORAENV_HOST/public_data'
+PUBLIC_DATA_BASE_URL = 'https://AGORAENV_HOST:AGORAENV_PORT/public_data'
 
 # security configuration
 SSL_CERT_PATH = '/srv/certs/selfsigned/cert.pem'

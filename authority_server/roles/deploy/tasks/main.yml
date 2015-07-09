@@ -1,0 +1,5 @@
+---
+  - include: install_docker.yml
+  - include: setup_postgres.yml
+  - include: install_ssl.yml
+  - include: pull_images.yml
