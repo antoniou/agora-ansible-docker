@@ -2,3 +2,6 @@ acv/*
 build
 eo_env.yml
 .vagrant/*
+certs/*
+
+!certs/.gitignore
