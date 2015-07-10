@@ -43,6 +43,6 @@ WORKDIR {{ eorchestra_dest }}
 ENV {{ key }} {{ value }}
 {% endfor %}
 
-EXPOSE {{ agora_core_view_port }}
+EXPOSE {{ docker.port }}
 
 CMD "run.sh"
