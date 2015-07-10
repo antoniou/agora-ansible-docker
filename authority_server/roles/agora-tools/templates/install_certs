@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import os
+import sys
 import json
 import pyinotify
 from subprocess import call
@@ -17,7 +18,12 @@ class EventHandler(pyinotify.ProcessEvent):
             self.process_IN_CLOSE_WRITE(event)
 
     def install(self, package_path):
-        self.package_command('install', package_path)
+        try:
+            self.package_command('install', package_path)
+        except IOError:
+            print "File {0} could not be read".format(package_path)
+            traceback.print_exc(file=sys.stdout)
+            print sys.exc_info()[0]
 
     def is_installed(self, package_name):
         name = self.installed_package_path(package_name)
