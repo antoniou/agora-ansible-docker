@@ -9,14 +9,14 @@
         - "{{ host.keys_path }}:{{ docker.keys_path}}"
         - "{{ host.certs_path }}:{{ docker.certs_path}}"
       ports:
-        - "{{ PORT }}: {{ PORT }}"
+        - "{{ host.port }}: {{ docker.port }}"
       expose:
         - "{{ PORT }}"
       env:
         PORT: "{{ PORT }}"
         HOST: "{{ HOST }}"
         PUBLICIP: "{{ PUBLIC_IP }}"
-        PRIVATEIP: "{{ PUBLIC_IP }}"
+        PRIVATEIP: "{{ PRIVATE_IP }}"
         KEYSTORE_PASS: "{{ KEYSTORE_PASS }}"
         DB_USER: "{{ db_user }}"
         DB_NAME: "{{ db_name }}"
