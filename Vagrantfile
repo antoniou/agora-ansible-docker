@@ -56,6 +56,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision "ansible" do |ansible|
     ansible.playbook = "authority_server/deploy.yml"
     ansible.verbose = "v"
-    ansible.extra_vars = "eo_env.yaml"
+    ansible.extra_vars = "eo_env.yml"
   end
 end
