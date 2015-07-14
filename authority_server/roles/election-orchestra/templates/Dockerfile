@@ -30,8 +30,7 @@ env JAVA_TOOL_OPTIONS -Dfile.encoding=UTF8
 run ./configure --enable-jgmpmee --enable-jecn && \
   make && make install && \
   cp .vfork_env /election-orchestra && \
-  bash -l -c "source /election-orchestra/.vfork_env && vog -rndinit RandomDevice /dev/urandom" && \
-  rm -rf /vfork
+  bash -l -c "source /election-orchestra/.vfork_env && vog -rndinit RandomDevice /dev/urandom"
 
 #RUN install_vfork {{ vfork_dest }} {{ eorchestra_dest }} && \
 #    rm -rf {{ vfork_dest }}

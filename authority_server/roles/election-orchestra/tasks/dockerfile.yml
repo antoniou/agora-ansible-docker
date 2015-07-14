@@ -19,5 +19,14 @@
     - { f: nginx.conf, dest: "/etc/nginx/nginx.conf" }
     - { f: eorchestra-supervisor.conf, dest: "etc/supervisor/conf.d/eorchestra-supervisor.conf" }
 
+- name: commands
+  template: src=commands/{{item.f}} dest={{ build_dir }}/root_fs/{{ item.dest }}
+  with_items:
+    - { f: create_backup.sh, dest: /usr/local/bin/create_backup.sh }
+    - { f: restore_backup.sh, dest: /usr/local/bin/restore_backup.sh }
+    - { f: reset-tally, dest: /usr/local/bin/reset-tally }
+    - { f: eoauto, dest: /usr/local/bin/eoauto }
+    - { f: vmnd.sh, dest: /usr/local/bin/vmnd.sh }
+
 - name: Render DockerFile for Election-Orchestra
   template: src=Dockerfile dest={{ build_dir }}/Dockerfile

@@ -1,5 +1,6 @@
 ---
 base_image: ubuntu:14.04
+name: election-orchestra
 apt_repositories:
   - ppa:webupd8team/java
 eorchestra_dest: /election-orchestra
@@ -44,7 +45,7 @@ git_repositories:
     branch: master
     dest: "{{ eorchestra_dest }}"
   vfork:
-    name: https://github.com/agoravoting/vfork.git
+    name: https://github.com/antoniou/vfork.git
     branch: master
     dest: "{{ vfork_dest }}"
 repos:

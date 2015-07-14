@@ -15,3 +15,4 @@
  CERT_KEY: key-nopass.pem
  CERT_CA: calist
  KEYSTORE_PASS: secret
+ PUBLIC_IP: 

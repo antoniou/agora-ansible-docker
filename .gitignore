@@ -3,5 +3,7 @@ build
 eo_env.yml
 .vagrant/*
 certs/*
+keys/*
+logs/*
 
 !certs/.gitignore

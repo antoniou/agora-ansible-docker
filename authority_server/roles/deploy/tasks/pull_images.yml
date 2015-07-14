@@ -8,8 +8,11 @@
       volumes:
         - "{{ host.keys_path }}:{{ docker.keys_path}}"
         - "{{ host.certs_path }}:{{ docker.certs_path}}"
+        - "{{ host.tests_path }}:{{ docker.tests_path}}"
       ports:
         - "{{ host.port }}: {{ docker.port }}"
+        - "{{ host.vfork_port }}: {{ docker.vfork_port }}"
+        - "{{ host.vfork_hint_port }}: {{ docker.vfork_hint_port }}"
       expose:
         - "{{ PORT }}"
       env:

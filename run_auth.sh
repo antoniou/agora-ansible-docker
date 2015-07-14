@@ -1,8 +1,9 @@
 #!/bin/bash
 
 PACKAGE_DEPENDENCIES=( ansible-playbook vagrant )
-DIRS=( keys certs )
+DIRS=( keys certs logs)
 _V=0
+TAIL_LOGS=0
 
 usage() {
   cat <<EOF
@@ -29,7 +30,7 @@ check_for_dependencies() {
 
 launch_auth() {
   log "Bringing VM machine up"
-  vagrant up --no-provision 
+  vagrant up --no-provision
   log "Bringing VM machine up"
   vagrant rsync-auto &
   log "Starting provisioning of Authority Server"
@@ -41,6 +42,11 @@ create_dirs() {
   mkdir -p $DIRS
 }
 
+tail_logs() {
+  log "Tailing logs from Authority Server"
+  tail -f logs/*.log
+}
+
 while getopts "hv" opt; do
   case $opt in
     h)
@@ -50,9 +56,14 @@ while getopts "hv" opt; do
     v)
       _V=1
       ;;
+    t)
+      TAIL_LOGS=1
+      ;;
   esac
 done
 
 
 check_for_dependencies
 launch_auth
+
+[[ $TAIL_LOGS -eq 1 ]] && tail_logs
