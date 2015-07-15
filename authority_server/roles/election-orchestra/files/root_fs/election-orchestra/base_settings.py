@@ -11,7 +11,7 @@ VFORK_SERVER_PORT_RANGE = [4081, 4083]
 # Socket address given as <hostname>:<port> to our hint server.
 # A hint server is a simple UDP server that reduces latency and
 # traffic on the HTTP servers.
-VFORK_HINT_SERVER_SOCKET = 'AGORAENV_HOST'
+VFORK_HINT_SERVER_SOCKET = '127.0.0.1'
 
 VFORK_HINT_SERVER_PORT_RANGE = [8081, 8083]
 
