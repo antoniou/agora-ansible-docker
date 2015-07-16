@@ -1,3 +1,2 @@
-# Agora Authority Server 
+# Agora Authority Server
 
-This is 
