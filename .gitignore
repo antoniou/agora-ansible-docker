@@ -7,3 +7,5 @@ keys/*
 logs/*
 
 !certs/.gitignore
+!keys/.gitignore
+!logs/.gitignore
