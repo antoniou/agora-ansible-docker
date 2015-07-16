@@ -5,6 +5,9 @@ DIRS=( keys certs logs)
 _V=0
 TAIL_LOGS=0
 
+# Clean up when exiting
+trap 'echo 'Cleaning up;kill $(jobs -p)' EXIT
+
 usage() {
   cat <<EOF
     Usage: $0 [options] environment
