@@ -6,6 +6,7 @@
   PRIVATE_IP: '{{ ansible_eth1["ipv4"]["address"] }}'
   PUBLIC_IP: '{{ PRIVATE_IP }}'
   DB_HOST: '{{ PRIVATE_IP }}'
+  AUTH_MEMBERS: ''
   postgres:
     main_conf: /etc/postgresql/9.3/main/postgresql.conf
     hba_conf: /etc/postgresql/9.3/main/pg_hba.conf

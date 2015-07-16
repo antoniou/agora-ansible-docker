@@ -8,11 +8,13 @@ from subprocess import call
 class EventHandler(pyinotify.ProcessEvent):
     package_dir='/etc/eopeers'
     installer = 'eopeers'
+    test_command = 'perform_tests'
     my_package_name = '{{ own_key_name }}'
 
     def process_IN_CLOSE_WRITE(self, event):
         if not ( self.is_installed(event.pathname) or self.is_my_package(event.pathname)):
             self.install(event.pathname)
+            self.run_tests()
 
     def process_IN_MOVED_TO(self, event):
             self.process_IN_CLOSE_WRITE(event)
@@ -49,6 +51,9 @@ class EventHandler(pyinotify.ProcessEvent):
                 if field:
                     return data[field]
                 return data
+
+    def run_tests(self):
+        call(self.test_command)
 
 # Crate handler
 handler = EventHandler()
