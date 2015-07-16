@@ -14,6 +14,7 @@
     keys_path: /home/vagrant/keys
     certs_path: /home/vagrant/certs
     tests_path: /home/vagrant/eotests
+    logs_path: /home/vagrant/logs
     port: 443
     vfork_port: 4081
     vfork_hint_port: 8081
@@ -21,6 +22,7 @@
     keys_path: /root/keys
     certs_path: /srv/certs/selfsigned
     tests_path: /srv/eotests
+    logs_path: /var/log/supervisor
     port: 443
     vfork_port: 4081
     vfork_hint_port: 8081

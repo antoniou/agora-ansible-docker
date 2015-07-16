@@ -51,7 +51,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.synced_folder "keys", "/home/vagrant/keys", type: "rsync"
   config.vm.synced_folder "certs", "/home/vagrant/certs"
-  config.vm.synced_folder "tests", "/home/vagrant/eotests"
+  config.vm.synced_folder "tests", "/home/vagrant/tests"
+  config.vm.synced_folder "logs", "/home/vagrant/logs"
   config.vm.synced_folder ".", "/vagrant", disabled: true
 
   config.vm.provision "ansible" do |ansible|

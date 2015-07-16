@@ -2,13 +2,14 @@
   - name: Application container
     docker:
       name: eorchestra
-      image: antoniou/election-orchestra
+      image: dcent/election-orchestra
       state: reloaded
       pull: always
       volumes:
         - "{{ host.keys_path }}:{{ docker.keys_path}}"
         - "{{ host.certs_path }}:{{ docker.certs_path}}"
         - "{{ host.tests_path }}:{{ docker.tests_path}}"
+        - "{{ host.logs_path }}:{{ docker.logs_path}}"
       ports:
         - "{{ host.port }}: {{ docker.port }}"
         - "{{ host.vfork_port }}: {{ docker.vfork_port }}"
