@@ -11,11 +11,13 @@
         - "{{ host.tests_path }}:{{ docker.tests_path}}"
         - "{{ host.logs_path }}:{{ docker.logs_path}}"
       ports:
-        - "{{ host.port }}: {{ docker.port }}"
+        - "{{ PORT }}: {{ docker.port }}"
         - "{{ host.vfork_port }}: {{ docker.vfork_port }}"
         - "{{ host.vfork_hint_port }}: {{ docker.vfork_hint_port }}"
       expose:
         - "{{ PORT }}"
+        - "{{ host.vfork_port }}"
+        - "{{ host.vfork_hint_port }}"
       env:
         PORT: "{{ PORT }}"
         HOST: "{{ HOST }}"
