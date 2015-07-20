@@ -18,11 +18,13 @@
     port: 443
     vfork_port: 4081
     vfork_hint_port: 8081
+    eotest_port: 8000
   docker:
     keys_path: /root/keys
     certs_path: /srv/certs/selfsigned
-    tests_path: /srv/eotests
+    tests_path: /srv/eotest
     logs_path: /var/log/supervisor
     port: 443
     vfork_port: 4081
     vfork_hint_port: 8081
+    eotest_port: 8000

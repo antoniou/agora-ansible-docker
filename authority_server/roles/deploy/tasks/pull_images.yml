@@ -14,10 +14,12 @@
         - "{{ PORT }}: {{ docker.port }}"
         - "{{ host.vfork_port }}: {{ docker.vfork_port }}"
         - "{{ host.vfork_hint_port }}: {{ docker.vfork_hint_port }}"
+        - "{{ host.eotest_port }}: {{ docker.eotest_port }}"
       expose:
         - "{{ PORT }}"
         - "{{ host.vfork_port }}"
         - "{{ host.vfork_hint_port }}"
+        - "{{ host.eotest_port }}"
       env:
         PORT: "{{ PORT }}"
         HOST: "{{ HOST }}"
