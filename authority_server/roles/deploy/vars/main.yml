@@ -13,7 +13,7 @@
   host:
     keys_path: /home/vagrant/keys
     certs_path: /home/vagrant/certs
-    tests_path: /home/vagrant/eotests
+    tests_path: /home/vagrant/tests
     logs_path: /home/vagrant/logs
     port: 443
     vfork_port: 4081
