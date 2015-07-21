@@ -1,0 +1,18 @@
+---
+PORT: 443
+HOST: auth1
+AUTH_MEMBERS: 2
+
+CERT_PATH: certs/
+CERT:
+  country: REPLACEME
+  state: REPLACEME
+  loc: REPLACEME
+  org: REPLACEME
+  org_unit: REPLACEME
+  name: auth1
+  email: REPLACEME
+CERT_NAME: cert.pem
+CERT_KEY: key-nopass.pem
+CERT_CA: calist
+KEYSTORE_PASS: secret

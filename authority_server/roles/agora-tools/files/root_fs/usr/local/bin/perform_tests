@@ -1,0 +1,25 @@
+#!/bin/bash
+
+authorities=$(\ls -afq /etc/eopeers/*.package| tr '\n' '\0' |xargs -0 -n1 basename -s .package)
+read -a authorities <<< $authorities
+test_flag_file=/tmp/.eotests_done
+test_command="eotest"
+
+run_test() {
+  auths=$(IFS=,; echo "${authorities[*]}")
+  $test_command full --vmnd --vcount 100 --peers ${auths[@]}
+  touch $test_flag_file
+}
+
+can_run_tests() {
+  auth_count=$(( ${#authorities[@]} + 1 ))
+   [ -z "$(ps aux|grep $test_command|grep -v grep)" ] && [ "$AUTH_MEMBERS" == "$auth_count" ] && [ ! -f $test_flag_file ]
+}
+
+if [[ -z "$AUTH_MEMBERS" ]];
+then
+  echo "AUTH_MEMBERS variable not defined. Skipping tests!"
+  exit 0;
+fi
+
+can_run_tests && run_test

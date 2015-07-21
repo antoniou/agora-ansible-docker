@@ -30,8 +30,7 @@ env JAVA_TOOL_OPTIONS -Dfile.encoding=UTF8
 run ./configure --enable-jgmpmee --enable-jecn && \
   make && make install && \
   cp .vfork_env /election-orchestra && \
-  bash -l -c "source /election-orchestra/.vfork_env && vog -rndinit RandomDevice /dev/urandom" && \
-  rm -rf /vfork
+  bash -l -c "source /election-orchestra/.vfork_env && vog -rndinit RandomDevice /dev/urandom"
 
 #RUN install_vfork {{ vfork_dest }} {{ eorchestra_dest }} && \
 #    rm -rf {{ vfork_dest }}
@@ -43,6 +42,6 @@ WORKDIR {{ eorchestra_dest }}
 ENV {{ key }} {{ value }}
 {% endfor %}
 
-EXPOSE {{ agora_core_view_port }}
+EXPOSE {{ docker.port }}
 
 CMD "run.sh"

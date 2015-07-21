@@ -1,7 +1,7 @@
 ---
 - name: Output directory is role specific
   set_fact: build_dir="{{ docker_build_dir }}/{{ name }}"
-  
+
 - name: Create output directory
   file: path={{ build_dir }} state=directory mode=0755
 
@@ -16,7 +16,17 @@
   with_items:
     - { f: auth.ini, dest: "{{ eorchestra_dest }}/auth.ini" }
     - { f: launch.sh, dest: "{{ eorchestra_dest }}/launch.sh" }
+    - { f: nginx.conf, dest: "/etc/nginx/nginx.conf" }
     - { f: eorchestra-supervisor.conf, dest: "etc/supervisor/conf.d/eorchestra-supervisor.conf" }
+
+- name: commands
+  template: src=commands/{{item.f}} dest={{ build_dir }}/root_fs/{{ item.dest }}
+  with_items:
+    - { f: create_backup.sh, dest: /usr/bin/create_backup.sh }
+    - { f: restore_backup.sh, dest: /usr/bin/restore_backup.sh }
+    - { f: reset-tally, dest: /usr/bin/reset-tally }
+    - { f: eoauto, dest: /usr/bin/eoauto }
+    - { f: vmnd.sh, dest: /usr/bin/vmnd.sh }
 
 - name: Render DockerFile for Election-Orchestra
   template: src=Dockerfile dest={{ build_dir }}/Dockerfile
