@@ -1,0 +1,14 @@
+---
+  - name: Generate SSL certificate if one is not provided
+    command:   >
+      openssl req -nodes -x509 -newkey rsa:4096 -keyout key-nopass.pem -out cert.pem -days 365 -subj
+      "/C={{ CERT.country }}/ST={{ CERT.state }}/L={{ CERT.loc }}/O={{ CERT.org }}/CN={{ CERT.name }}/E={{ CERT.email }}"
+    args:
+      chdir: "{{ host.certs_path }}"
+      creates: "{{ host.certs_path }}/cert.pem"
+
+  - name: Generate CA list if one is not provided
+    command: cp cert.pem calist
+    args:
+      chdir: "{{ host.certs_path }}"
+      creates: "{{ host.certs_path }}/calist"

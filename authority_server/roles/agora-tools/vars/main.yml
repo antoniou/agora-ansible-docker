@@ -1,6 +1,6 @@
 ---
 name: agora-tools
-base_image: antoniou/election-orchestra-base
+base_image: dcent/election-orchestra-base
 apt_repositories:
 eorchestra_dest: /election-orchestra
 vfork_dest: /vfork
