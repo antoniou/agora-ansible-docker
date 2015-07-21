@@ -1,5 +1,6 @@
 ---
 base_image: ubuntu:14.04
+name: election-orchestra
 apt_repositories:
   - ppa:webupd8team/java
 eorchestra_dest: /election-orchestra
@@ -43,8 +44,8 @@ git_repositories:
     name: https://github.com/agoravoting/election-orchestra.git
     branch: master
     dest: "{{ eorchestra_dest }}"
-  vfork:    
-    name: https://github.com/agoravoting/vfork.git
+  vfork:
+    name: https://github.com/antoniou/vfork.git
     branch: master
     dest: "{{ vfork_dest }}"
 repos:
@@ -56,6 +57,5 @@ env_vars:
   FRESTQ_SETTINGS: base_settings.py
   CERTS_DIR: "{{ certs_dest }}"
 
-agora_elections_domain: agora.dev
-agora_core_view_port: 14444
-agora_core_view_domain: agora.dev
+docker:
+  port: 443

@@ -1,0 +1,30 @@
+---
+  db_user: eorchestra
+  db_name: eorchestra
+  db_port: 5432
+  cidr_block: 172.17.0.0/16
+  PRIVATE_IP: '{{ ansible_eth1["ipv4"]["address"] }}'
+  PUBLIC_IP: '{{ PRIVATE_IP }}'
+  DB_HOST: '{{ PRIVATE_IP }}'
+  AUTH_MEMBERS: ''
+  postgres:
+    main_conf: /etc/postgresql/9.3/main/postgresql.conf
+    hba_conf: /etc/postgresql/9.3/main/pg_hba.conf
+  host:
+    keys_path: /home/vagrant/keys
+    certs_path: /home/vagrant/certs
+    tests_path: /home/vagrant/tests
+    logs_path: /home/vagrant/logs
+    port: 443
+    vfork_port: 4081
+    vfork_hint_port: 8081
+    eotest_port: 8000
+  docker:
+    keys_path: /root/keys
+    certs_path: /srv/certs/selfsigned
+    tests_path: /srv/eotest
+    logs_path: /var/log/supervisor
+    port: 443
+    vfork_port: 4081
+    vfork_hint_port: 8081
+    eotest_port: 8000

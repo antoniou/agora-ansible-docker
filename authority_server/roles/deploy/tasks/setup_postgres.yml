@@ -1,0 +1,33 @@
+---
+  - name: Install postgres
+    apt: name={{ item }} update_cache=yes
+    with_items:
+      - python-psycopg2
+      - postgresql
+      - postgresql-server-dev-all
+
+  - name: Make postgres accessible from Docker host
+    lineinfile: dest={{ postgres.hba_conf }} line="host  all {{ db_user }}  {{ cidr_block }} trust"
+    notify:
+      - restart postgres
+
+  - name: Make postgres bind to all IP addresses
+    lineinfile: dest={{ postgres.main_conf }} regexp='^.*listen_addresses = .*' state=present line="listen_addresses = '*'"
+    notify:
+      - restart postgres
+
+  - name: Create random password if one is not given
+    set_fact:
+      DB_PASSWORD: "{{ lookup('password', '/tmp/passwordfile chars=ascii_letters') }}"
+    when: DB_PASSWORD|default("") == ""
+
+  - name: Election orchestra, Create Database User
+    sudo_user: postgres
+    postgresql_user: user={{ db_user }} password="{{ DB_PASSWORD }}" port={{ db_port }}
+
+  - name: Election orchestra, Create Database
+    sudo_user: postgres
+    postgresql_db: name={{ db_name }} owner={{ db_user }} encoding="utf-8"
+
+  - name: Restart postgres
+    service: name=postgresql state=reloaded

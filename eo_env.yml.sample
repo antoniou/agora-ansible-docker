@@ -1,0 +1,17 @@
+---
+PORT: 443
+HOST: auth1
+
+CERT_PATH: certs/
+CERT:
+  country: UK
+  state: London
+  loc: London
+  org: ThoughtWorks
+  org_unit: dcent
+  name: auth1
+  email: dcent@thoughtworks.com
+CERT_NAME: cert.pem
+CERT_KEY: key-nopass.pem
+CERT_CA: calist
+KEYSTORE_PASS: secret
