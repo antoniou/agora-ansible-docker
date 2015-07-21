@@ -30,4 +30,4 @@
     postgresql_db: name={{ db_name }} owner={{ db_user }} encoding="utf-8"
 
   - name: Restart postgres
-    service: name=postgresql state=reloaded
+    service: name=postgresql state=restarted
