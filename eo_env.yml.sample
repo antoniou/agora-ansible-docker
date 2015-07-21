@@ -1,17 +1,16 @@
 ---
 PORT: 443
 HOST: auth1
-AUTH_MEMBERS: 2
 
 CERT_PATH: certs/
 CERT:
-  country: REPLACEME
-  state: REPLACEME
-  loc: REPLACEME
-  org: REPLACEME
-  org_unit: REPLACEME
+  country: UK
+  state: London
+  loc: London
+  org: ThoughtWorks
+  org_unit: dcent
   name: auth1
-  email: REPLACEME
+  email: dcent@thoughtworks.com
 CERT_NAME: cert.pem
 CERT_KEY: key-nopass.pem
 CERT_CA: calist
