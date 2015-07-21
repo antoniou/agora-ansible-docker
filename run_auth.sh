@@ -44,7 +44,10 @@ create_dirs() {
 
 tail_logs() {
   log "Tailing logs from Authority Server"
-  tail -f logs/*.log
+  while true;
+  do
+    tail -f logs/*.log
+  done
 }
 
 while getopts "hvt" opt; do
