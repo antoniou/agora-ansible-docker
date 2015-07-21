@@ -2,8 +2,11 @@
 import os
 import sys
 import json
+import time
 import pyinotify
 from subprocess import call
+from subprocess import Popen
+import logging
 
 class EventHandler(pyinotify.ProcessEvent):
     package_dir='/etc/eopeers'
@@ -12,8 +15,11 @@ class EventHandler(pyinotify.ProcessEvent):
     my_package_name = '{{ own_key_name }}'
 
     def process_IN_CLOSE_WRITE(self, event):
-        if not ( self.is_installed(event.pathname) or self.is_my_package(event.pathname)):
+        if not self.is_package_file(event.pathname):
+            return False
+        if not (self.is_installed(event.pathname) or self.is_my_package(event.pathname)):
             self.install(event.pathname)
+            self.restart_nginx()
             self.run_tests()
 
     def process_IN_MOVED_TO(self, event):
@@ -24,16 +30,23 @@ class EventHandler(pyinotify.ProcessEvent):
             self.package_command('install', package_path)
         except IOError:
             print "File {0} could not be read".format(package_path)
-            traceback.print_exc(file=sys.stdout)
             print sys.exc_info()[0]
 
     def is_installed(self, package_name):
         name = self.installed_package_path(package_name)
         return os.path.isfile(name)
 
+    def is_package_file(self, package_name):
+        base = os.path.basename(package_name)
+        return not base.startswith('.')
+
     def hostname(self, package_path):
         installed_path = self.installed_package_path(package_path)
         return self.read_package(installed_path, 'hostname')
+
+    def restart_nginx(self):
+        call(['supervisorctl', 'restart', 'all'])
+        time.sleep(5)
 
     def package_command(self, command, arg):
         call([self.installer, '--{0}'.format(command), arg])
@@ -53,7 +66,7 @@ class EventHandler(pyinotify.ProcessEvent):
                 return data
 
     def run_tests(self):
-        call(self.test_command)
+        Popen(['/usr/local/bin/perform_tests'], env=os.environ, shell=True)
 
 # Crate handler
 handler = EventHandler()
