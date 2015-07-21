@@ -21,17 +21,17 @@ In order to launch a VM box running an authority server:
   $ cp eo_env.yml.sample eo_env.yml
   ```
   
-      You can provide your own configuration by editing the file. For testing purposes, you will only need to change the HOST variable: 
+ You can provide your own configuration by editing the file. For testing purposes, you will only need to change the HOST variable: 
   
-      (For Linux) 
-      ```
-      $ sed -i 's/\(HOST:\).*/\1 auth1/' eo_env.yml
-      ```
-    
-      (For Mac OS) 
-      ```
-      $ sed -i.bu 's/\(HOST:\).*/\1 auth1/' eo_env.yml && rm eo_env.yml.bu
-      ```
+ (For Linux) 
+ ```
+ $ sed -i 's/\(HOST:\).*/\1 auth1/' eo_env.yml
+ ```
+ 
+ (For Mac OS) 
+ ```
+ $ sed -i.bu 's/\(HOST:\).*/\1 auth1/' eo_env.yml && rm eo_env.yml.bu
+ ```
   
 1. **(Optional)** If you want your authority server to initiate a test election in order to verify the correct operation of the Authority Server Cluster, you need to specify the amount of authority servers inside the environment configuration file. **Only one of the authority servers should initiate the test**, therefore make sure that this step is only performed on only one member of the authority server member set:
   ```
