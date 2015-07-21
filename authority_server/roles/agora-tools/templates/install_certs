@@ -19,7 +19,7 @@ class EventHandler(pyinotify.ProcessEvent):
             return False
         if not (self.is_installed(event.pathname) or self.is_my_package(event.pathname)):
             self.install(event.pathname)
-            self.restart_nginx()
+            self.restart_all()
             self.run_tests()
 
     def process_IN_MOVED_TO(self, event):
@@ -44,7 +44,7 @@ class EventHandler(pyinotify.ProcessEvent):
         installed_path = self.installed_package_path(package_path)
         return self.read_package(installed_path, 'hostname')
 
-    def restart_nginx(self):
+    def restart_all(self):
         call(['supervisorctl', 'restart', 'all'])
         time.sleep(5)
 
