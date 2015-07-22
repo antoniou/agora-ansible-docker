@@ -48,6 +48,7 @@ create_dirs() {
 }
 
 clean_up() {
+  log "Removing temporary directories"
   for dir in "${DIRS[@]}";
   do
     rm -rf $dir/*
@@ -55,6 +56,7 @@ clean_up() {
 }
 
 clean_up_db() {
+  log "Cleaning up database"
   vagrant ssh -c 'sudo -u eorchestra psql -c "delete from authority ; delete from session; delete from election;delete from message; delete from query_queue;  delete from task;"'
 }
 
@@ -80,6 +82,7 @@ while getopts "hvtr" opt; do
       TAIL_LOGS=1
       ;;
     r)
+      log "Cleaning up"
       clean_up
       clean_up_db
       ;;
