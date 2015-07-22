@@ -64,7 +64,7 @@ To launch a single authority server:
 ### 2. Launching an Authority Server Demo Cluster
   Using the provided run script, you can deploy a cluster of Authority Servers in Demo mode. Use this mode when you want to launch a complete Authority Server cluster from scratch.
   ```
-  $ ./run_auth.sh -d
+  $ ./run_auth.sh -d -t
   ```
   
   This mode performs the following actions:
