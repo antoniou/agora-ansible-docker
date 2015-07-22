@@ -114,7 +114,8 @@ demo() {
    rm -rf Vagrantfile
    args=""
    [[ $auth == $authorities ]]  && args="-v"
-   cd $auth_dir && ./run_auth.sh $args && cd ../../..
+   cd $auth_dir && ./run_auth.sh $args
+   cd ../../..
    git checkout Vagrantfile
   done
 
