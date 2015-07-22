@@ -1,3 +1,7 @@
 ---
+  - name: Add image version to tag, if version exists
+    set_fact: tag="{{ tag }}:{{ version }}"
+    when: version != ""
+
   - name: check or build image
     shell: "docker build -t {{ dockerhub_user}}/{{ tag }} {{ build_dir }}"

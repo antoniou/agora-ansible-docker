@@ -5,6 +5,6 @@
     - config.yml
   roles:
   - role: election-orchestra
-  - { role: docker-build, tag: "{{ docker_tag.election_orchestra }}" }
+  - { role: docker-build, tag: "{{ docker_tag.election_orchestra }}" version: "{{ election_orchestra.version }}"}
   - role: agora-tools
-  - { role: docker-build, tag: "{{ docker_tag.agora_tools }}" }
+  - { role: docker-build, tag: "{{ docker_tag.agora_tools }}"  version: "{{ agora_tools.version }}" }

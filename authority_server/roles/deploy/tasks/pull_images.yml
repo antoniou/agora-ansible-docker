@@ -1,8 +1,12 @@
 ---
+  - name: Include image version if specified
+    set_fact: docker.image_name="{{ docker.image_name }}:{{ DOCKER_IMAGE_VERSION }}"
+    when: DOCKER_IMAGE_VERSION is defined
+
   - name: Application container
     docker:
       name: eorchestra
-      image: dcent/election-orchestra
+      image: "{{ docker.image_name }}"
       state: reloaded
       pull: always
       volumes:

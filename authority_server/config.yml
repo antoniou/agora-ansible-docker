@@ -2,3 +2,6 @@
 docker_tag:
     election_orchestra: election-orchestra-base
     agora_tools: election-orchestra
+version:
+    election_orchestra: 0.1
+    agora_tools: 0.1
