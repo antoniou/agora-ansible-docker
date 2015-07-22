@@ -1,7 +1,8 @@
 #!/bin/bash
 
 PACKAGE_DEPENDENCIES=( ansible-playbook vagrant )
-DIRS=( keys certs logs)
+ANSIBLE_VERSION=1.9
+DIRS=( keys certs logs tests )
 _V=0
 TAIL_LOGS=0
 
@@ -28,6 +29,10 @@ check_for_dependencies() {
   done
 }
 
+check_ansible_version() {
+  ansible --version|head -1|awk '{ print $2 }'
+}
+
 launch_auth() {
   log "Bringing VM machine up"
   vagrant up --no-provision
@@ -38,8 +43,19 @@ launch_auth() {
 }
 
 create_dirs() {
-  log "Creating directories $DIRS"
-  mkdir -p $DIRS
+  log "Creating directories ${DIRS[@]}"
+  mkdir -p "${DIRS[@]}"
+}
+
+clean_up() {
+  for dir in "${DIRS[@]}";
+  do
+    rm -rf $dir/*
+  done
+}
+
+clean_up_db() {
+  vagrant ssh -c 'sudo -u eorchestra psql -c "delete from authority ; delete from session; delete from election;delete from message; delete from query_queue;  delete from task;"'
 }
 
 tail_logs() {
@@ -47,10 +63,11 @@ tail_logs() {
   while true;
   do
     tail -f logs/*.log
+    sleep 3
   done
 }
 
-while getopts "hvt" opt; do
+while getopts "hvtr" opt; do
   case $opt in
     h)
       usage
@@ -61,6 +78,10 @@ while getopts "hvt" opt; do
       ;;
     t)
       TAIL_LOGS=1
+      ;;
+    r)
+      clean_up
+      clean_up_db
       ;;
   esac
 done
