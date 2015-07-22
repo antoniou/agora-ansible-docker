@@ -5,6 +5,7 @@ eo_env.yml
 certs/*
 keys/*
 logs/*
+tests/*
 
 !certs/.gitignore
 !keys/.gitignore
