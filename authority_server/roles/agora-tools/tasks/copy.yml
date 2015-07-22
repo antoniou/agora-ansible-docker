@@ -1,7 +1,0 @@
----
-- name: Copy tools to /usr/bin
-  command: cp {{ git_repositories['agora-tools']['dest'] }}/{{item}} {{ build_dir }}/root_fs/usr/bin/
-  with_items:
-    - eotasks.py
-    - eotest.py
-    - eopeers.py
