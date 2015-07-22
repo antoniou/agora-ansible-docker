@@ -1,7 +1,7 @@
 # Agora Authority Server Deployment
 This document describes the deployment process of Authority Servers for the Agora Voting System.
 
-An Agora Voting System requires **two or more Authority Servers** to operate. The authority servers of a voting system communicate during elections, but they first need to be able to discover each other and establish a trust relationship. To accomplish this, **each Authority Server needs to exchange a generated package with every other server in the Agora Voting System**.
+An Agora Voting System requires **two or more Authority Servers** to operate. The authority servers of a voting system communicate during elections, but they first need to be able to discover each other and establish a trust relationship. To accomplish this, **each Authority Server needs to exchange an automatically generated package with every other server in the Agora Voting System**. This package (.pkg) describes where the authority server is running and also provides the certificate that uniquely identifies the authority.
 
 After communication and trust between the authority servers is established, **an election can be initiated from one of the authority servers**. This document describes how a test election can be performed, so that it is verified that the Authorities are running correctly and can conduct elections.
 
