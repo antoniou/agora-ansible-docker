@@ -121,7 +121,7 @@ demo() {
   done
 
   copy_keys_between ${authorities[@]}
-  [[ $_T -eq 1 ]] && tail -f $DEMO_DIR/${authorities}/logs/*.log
+  tail -f $DEMO_DIR/${authorities}/logs/*.log
 }
 
 # Initialize the config file with the correct host-name
