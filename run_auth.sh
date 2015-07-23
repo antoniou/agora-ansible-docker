@@ -75,6 +75,7 @@ clean_up() {
 
 clean_up_db() {
   log "Cleaning up database"
+  vagrant ssh -c 'sudo useradd eorchestra'
   vagrant ssh -c 'sudo -u eorchestra psql -c "delete from authority ; delete from session; delete from election;delete from message; delete from query_queue;  delete from task;"'
 }
 
@@ -120,7 +121,6 @@ demo() {
   done
 
   copy_keys_between ${authorities[@]}
-  log "Starting authority $auth..."
   [[ $_T -eq 1 ]] && tail -f $DEMO_DIR/${authorities}/logs/*.log
 }
 
@@ -154,6 +154,7 @@ copy_keys_between() {
         sleep 5
       done
       cp $auth_dir/certs/my_auth.pkg $other_auth_dir/keys/$auth.pkg
+      cd $auth_dir &&  vagrant ssh -c 'sudo docker exec eorchestra supervisorctl restart all' && cd ../../..
     done
     sleep 20
   done
