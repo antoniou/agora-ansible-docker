@@ -34,6 +34,10 @@ When building a docker image for the Agora Voting Authority service, the followi
 1. A base Docker image is built that only includes [election-orchestra](https://github.com/agoravoting/election-orchestra). The image is tagged with the name **dcent/election-orchestra-base**
 2. The base docker image is used as a source image, to build a Docker image that includes [election-orchestra](https://github.com/agoravoting/election-orchestra) and [agora-tools](https://github.com/agoravoting/agora-tools). The image is named  **dcent/election-orchestra**
 
+### Deploying an Authority Server
+
+An Authority server can be deployed using the [README](../README.md) guide in this repository
+
 ### The Runtime template-rendering mechanism
 
 When an container boots up, several system and application configuration files are rendered, using the environment variables that are passed to the container as input arguments. For example, we want the application inside the container to connect to the right database endpoint, which is provided as an environment variable.
