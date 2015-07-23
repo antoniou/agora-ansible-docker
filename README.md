@@ -7,6 +7,7 @@ After communication and trust between the authority servers is established, **an
 
 ### Option 1: Launching an Authority Server Demo Cluster
   Using the provided run script, you can deploy a cluster of Authority Servers in Demo mode. Use this mode when you want to launch a complete Authority Server cluster from scratch.
+  
   1. Clone this repository, containing the Ansible playbook that is used for the deployment of the Authority server:
   ```
   $ git clone git@github.com:antoniou/agora-ansible-docker.git
