@@ -44,7 +44,7 @@ This section describes the steps that need to be performed in order to launch a 
 
 To launch a single authority server:
 
-1. Clone this repository, containing the Ansible playbook that is used for the deployment of the Authority server. You can place the repository into a directory named after your authority server:
+1. Clone this repository, containing the Ansible playbook that is used for the deployment of the Authority server. You can place the repository into a directory named authority1 (name of the authority):
   ```
   $ git clone git@github.com:antoniou/agora-ansible-docker.git authority1 
   ```
