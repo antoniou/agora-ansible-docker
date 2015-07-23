@@ -1,15 +1,14 @@
-# Docker-based Authorities
+# Overview 
 
 This document describes the build process of a Docker-Based Authority Server and provides information on how the Docker Image is build and deployed.
 
-## 1. Overview
 
 This repository provides an ansible playbook that:
 
 1. Builds a Docker Image for an Agora Voting System Authority ([election-orchestra](https://github.com/agoravoting/election-orchestra) + [agora-tools](https://github.com/agoravoting/agora-tools)).
 2. Deploys an Agora Voting System Authority, in a Vagrant-provisioned VM and by deploying the built Docker Image inside the VM.
 
-## 2. Building a new  Authority Docker Image
+## 1. Building a new  Authority Docker Image
 
 To build a new Docker Image for Election-Orchestra, you will need to:
 
@@ -34,9 +33,16 @@ When building a docker image for the Agora Voting Authority service, the followi
 1. A base Docker image is built that only includes [election-orchestra](https://github.com/agoravoting/election-orchestra). The image is tagged with the name **dcent/election-orchestra-base**
 2. The base docker image is used as a source image, to build a Docker image that includes [election-orchestra](https://github.com/agoravoting/election-orchestra) and [agora-tools](https://github.com/agoravoting/agora-tools). The image is named  **dcent/election-orchestra**
 
-### Deploying an Authority Server
+## 2. Deploying an Authority Server
 
-An Authority server can be deployed using the [README](../README.md) guide in this repository
+An Authority server can be deployed using the [README](../README.md) guide in this repository. 
+
+The deployment process performs the following tasks:
+
+1. A new Vagrant Box is launched and provided with all the necessary packages ( Docker, Postgres, git ).
+2. A Postgres db is created and made accessible from within the vagrant box.
+2. The Authority Docker image is pulled from its [dockerhub repository](https://registry.hub.docker.com/u/dcent/election-orchestra/).
+3. A new docker container is deployed, using a set of environment variables that are passed from the eo_env.yml file (See sample [here](../eoenv.yml.sample))
 
 ### The Runtime template-rendering mechanism
 
@@ -73,6 +79,5 @@ When an Authority container starts, it runs an entrypoint script which is locate
 1. It executes (in alphabetical order) all the scripts that are located in directory **/etc/entrypoint.d/pre**
 2. It starts all the supervised services ( nginx, election-orchestra)
 3. It executes (in alphabetical order) all the scripts that are located in directory **/etc/entrypoint.d/post**
-
 
 
