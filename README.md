@@ -5,8 +5,40 @@ An Agora Voting System requires **two or more Authority Servers** to operate. Th
 
 After communication and trust between the authority servers is established, **an election can be initiated from one of the authority servers**. This document describes how a test election can be performed, so that it is verified that the Authorities are running correctly and can conduct elections.
 
+### Option 1: Launching an Authority Server Demo Cluster
+  Using the provided run script, you can deploy a cluster of Authority Servers in Demo mode. Use this mode when you want to launch a complete Authority Server cluster from scratch.
+  1. Clone this repository, containing the Ansible playbook that is used for the deployment of the Authority server:
+  ```
+  $ git clone git@github.com:antoniou/agora-ansible-docker.git
+  $ cd agora-ansible-docker
+  ```
+  
+  1. Launch the authority cluster with the demo mode (-d) parameter:
+  ```
+  $ ./run_auth.sh -d -t
+  ```
+  
+  
+This mode performs the following actions:
+  1. Two authority servers, **auth1 and auth2** are setup, with auth1 configured to initiate a test election when both servers are up and running.
+  2. The keys are exchanged between auth1 and auth2
+  3. The logs of auth1 (test initiator) are presented, to show the outcome of the test election.
+  4. The output files of the election are placed inside the directory **tests/demo/auth1/tests**
+
+  A succesful election will have the present a trace that resembles [this](https://gist.github.com/antoniou/d2ab75568d166f045d0e#file-agora_voting_election). Once it is finished, the results will be presented:
+  
+  ```
+  $ ls -la agora/tests/demo/auth1/tests/data
+  total 1552
+drwxr-xr-x  6 nassos  staff     204 23 Jul 10:05 .
+drwxr-xr-x  5 nassos  staff     170 23 Jul 10:05 ..
+-rw-r--r--  1 nassos  staff  522094 23 Jul 10:05 4263.tar.gz
+-rw-r--r--  1 nassos  staff  139250 23 Jul 10:05 ctexts4263
+-rw-r--r--  1 nassos  staff    2504 23 Jul 10:05 pk4263
+-rw-r--r--  1 nassos  staff  125650 23 Jul 10:05 vmndCtexts4263
+  ```
  
-### 1. Deploying a single Authority Server <a name="deploy"></a>
+### Option 2: Deploying a single Authority Server to an existing Cluster<a name="deploy"></a> 
 
 This section describes the steps that need to be performed in order to launch a single authority server that will connect to one or more peers. You will need to use this guide if you want to deploy your own Authority Server that will connect to an existing cluster of servers, or you intend to launch your own Authority Server cluster, one by one.
 
@@ -33,12 +65,12 @@ To launch a single authority server:
   
  **(For Linux)**
  <pre>
- $ sed -i 's/\(HOST:\).*/\1 <b>auth1</b>/' eo_env.yml
+ $ sed -i 's/\(HOST:\).*/\1 <b>authority1</b>/' eo_env.yml
  </pre>
  
  **(For Mac OS)**
  <pre>
- $ sed -i.bu 's/\(HOST:\).*/\1 <b>auth1</b>/' eo_env.yml && rm eo_env.yml.bu
+ $ sed -i.bu 's/\(HOST:\).*/\1 <b>authority1</b>/' eo_env.yml && rm eo_env.yml.bu
  </pre>
   
 1. **(Optional)** If you want your authority server to initiate a test election in order to verify the correct operation of the Authority Server Cluster, you need to specify the amount of authority servers inside the environment configuration file. **Only one of the authority servers should initiate the test**, therefore make sure that this step is only performed on only one member of the authority server member set:
@@ -61,17 +93,7 @@ To launch a single authority server:
   $ cp /path_to_provided_keys/*.pkg keys
   </pre>
 
-### 2. Launching an Authority Server Demo Cluster
-  Using the provided run script, you can deploy a cluster of Authority Servers in Demo mode. Use this mode when you want to launch a complete Authority Server cluster from scratch.
-  ```
-  $ ./run_auth.sh -d -t
-  ```
-  
-  This mode performs the following actions:
-  1. Two authority servers, **auth1 and auth2** are setup, with auth1 configured to initiate a test election when both servers are up and running.
-  2. The keys are exchanged between auth1 and auth2
-  3. The logs of auth1 (test initiator) are presented, to show the outcome of the test election.
-  4. The output files of the election are placed inside the directory **tests/demo/auth1/tests**
+  Once  the authority is setup, the run script will start tailing the logs of the application
 
 
 ### Performing a test election:
