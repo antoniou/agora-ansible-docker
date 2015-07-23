@@ -34,7 +34,7 @@ To enable rendering a template during initialization:
   
   For each of the placeholders, there needs to be an environment variable passed to the docker container:
   
-| Placeholder   |  Env var needed  |
+  | Placeholder   |  Env var needed  |
 |---|---|
 | AGORAENV_HOST  |   HOST |
 | AGORAENV_DB_USER   | DB_USER  |
