@@ -121,7 +121,6 @@ demo() {
   done
 
   copy_keys_between ${authorities[@]}
-  log "Starting authority $auth..."
   [[ $_T -eq 1 ]] && tail -f $DEMO_DIR/${authorities}/logs/*.log
 }
 
