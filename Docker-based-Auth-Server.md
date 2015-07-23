@@ -18,7 +18,7 @@ When an container boots up, several system and application configuration files a
 
 There is a simple and light-weight run-time rendering mechanism in place: The image includes a script under */usr/local/bin/render_templates*. The paths to the templates that need to be rendered are specified under <i>/etc/render.d/*.conf</i>. The template file should contain placeholders that are prefixed with "AGORAENV_"
 
-To enable rendering a template during initialization:
+**To enable rendering a template during initialization**:
 
 1. Add the path to the template that needs to be rendered. E.g, to render file   /election-orchestra/base_settings.py:
   ```
