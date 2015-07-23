@@ -42,7 +42,7 @@ The deployment process performs the following tasks:
 1. A new Vagrant Box is launched and provided with all the necessary packages ( Docker, Postgres, git ).
 2. A Postgres db is created and made accessible from within the vagrant box.
 2. The Authority Docker image is pulled from its [dockerhub repository](https://registry.hub.docker.com/u/dcent/election-orchestra/).
-3. A new docker container is deployed, using a set of environment variables that are passed from the eo_env.yml file (See sample [here](../eoenv.yml.sample))
+3. A new docker container is deployed, using a set of environment variables that are passed from the eo_env.yml file (See sample [here](../eo_env.yml.sample))
 
 ### The Runtime template-rendering mechanism
 
