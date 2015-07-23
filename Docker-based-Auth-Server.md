@@ -1,18 +1,38 @@
 # Docker-based Authorities
 
-This document provides information on the build process of a Docker-Based Authority Server
+This document describes the build process of a Docker-Based Authority Server and provides information on how the Docker Image is build and deployed.
 
-## Building a new  Authority Docker Image
+## 1. Overview
 
-The playbooks build a base image that only includes the client application and...
+This repository provides an ansible playbook that:
 
-```
+1. Builds a Docker Image for an Agora Voting System Authority ([election-orchestra](https://github.com/agoravoting/election-orchestra) + [agora-tools](https://github.com/agoravoting/agora-tools)).
+2. Deploys an Agora Voting System Authority, in a Vagrant-provisioned VM and by deploying the built Docker Image inside the VM.
+
+## 2. Building a new  Authority Docker Image
+
+To build a new Docker Image for Election-Orchestra, you will need to:
+
+1. Optionally specify a version of the docker image you want to build by editing the configuration file (config.yml)
+
+1. Run the build Ansible playbook
+
+  ```
 $ ansible-playbook -i hosts/all.yml  authority_server/build.yml
 ```
 
-## Description
+1. Upload your image to Dockerhub:
 
+  ```
+$ docker push dcent/election-orchestra
+```
 
+### Build process overview
+
+When building a docker image for the Agora Voting Authority service, the following process takes place:
+
+1. A base Docker image is built that only includes [election-orchestra](https://github.com/agoravoting/election-orchestra). The image is tagged with the name **dcent/election-orchestra-base**
+2. The base docker image is used as a source image, to build a Docker image that includes [election-orchestra](https://github.com/agoravoting/election-orchestra) and [agora-tools](https://github.com/agoravoting/agora-tools). The image is named  **dcent/election-orchestra**
 
 ### The Runtime template-rendering mechanism
 
@@ -44,4 +64,11 @@ There is a simple and light-weight run-time rendering mechanism in place: The im
 
 ### The entrypoint script
 
-The entrypoint to the container, 
+When an Authority container starts, it runs an entrypoint script which is located in /usr/local/bin/run.sh. This script performs the following actions:
+
+1. It executes (in alphabetical order) all the scripts that are located in directory **/etc/entrypoint.d/pre**
+2. It starts all the supervised services ( nginx, election-orchestra)
+3. It executes (in alphabetical order) all the scripts that are located in directory **/etc/entrypoint.d/post**
+
+
+
