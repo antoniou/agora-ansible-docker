@@ -19,7 +19,7 @@ To build a new Docker Image for Election-Orchestra, you will need to:
 
   ```
 $ ansible-playbook -i hosts/all.yml  authority_server/build.yml
-```
+  ```
 
 1. Upload your image to Dockerhub:
 
