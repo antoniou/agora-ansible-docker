@@ -4,6 +4,8 @@ This document provides information on the build process of a Docker-Based Author
 
 ## Building a new  Authority Docker Image
 
+The playbooks build a base image that only includes the client application and...
+
 ```
 $ ansible-playbook -i hosts/all.yml  authority_server/build.yml
 ```
@@ -39,3 +41,7 @@ There is a simple and light-weight run-time rendering mechanism in place: The im
 | AGORAENV_HOST  |   HOST |
 | AGORAENV_DB_USER   | DB_USER  |
 | AGORAENV_DB_NAME  | DB_NAME  |
+
+### The entrypoint script
+
+The entrypoint to the container, 
