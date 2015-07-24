@@ -1,6 +1,6 @@
 # Overview 
 
-This document describes the build process of a Docker-Based Authority Server and provides information on how the Docker Image is build and deployed.
+This document describes the build process of a Docker-Based Authority Server and provides information on how the Docker Image is built and deployed.
 
 
 This repository provides an ansible playbook that:
@@ -14,7 +14,7 @@ To build a new Docker Image for Election-Orchestra, you will need to:
 
 1. Optionally specify a version of the docker image you want to build by editing the configuration file (config.yml)
 
-1. Run the build Ansible playbook
+1. Run the build Ansible playbook:
 
   ```
 $ ansible-playbook -i hosts/all.yml  authority_server/build.yml
@@ -46,7 +46,7 @@ The deployment process performs the following tasks:
 
 ### The Runtime template-rendering mechanism
 
-When an container boots up, several system and application configuration files are rendered, using the environment variables that are passed to the container as input arguments. For example, we want the application inside the container to connect to the right database endpoint, which is provided as an environment variable.
+When a container boots up, several system and application configuration files are rendered, using the environment variables that are passed to the container as input arguments. For example, we want the application inside the container to connect to the right database endpoint, which is provided as an environment variable.
 
 There is a simple and light-weight run-time rendering mechanism in place: The image includes a script under */usr/local/bin/render_templates*. The paths to the templates that need to be rendered are specified under <i>/etc/render.d/*.conf</i>. The template file should contain placeholders that are prefixed with "AGORAENV_"
 
@@ -77,7 +77,7 @@ There is a simple and light-weight run-time rendering mechanism in place: The im
 When an Authority container starts, it runs an entrypoint script which is located in /usr/local/bin/run.sh. This script performs the following actions:
 
 1. It executes (in alphabetical order) all the scripts that are located in directory **/etc/entrypoint.d/pre**
-2. It starts all the supervised services ( nginx, election-orchestra)
+2. It starts all the supervised services (nginx, election-orchestra)
 3. It executes (in alphabetical order) all the scripts that are located in directory **/etc/entrypoint.d/post**
 
 
