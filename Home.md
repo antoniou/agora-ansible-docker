@@ -1,2 +1,0 @@
-# Agora Authority Server
-
